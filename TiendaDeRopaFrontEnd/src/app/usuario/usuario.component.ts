@@ -32,13 +32,13 @@ export class UsuarioComponent implements OnInit {
       (res) => {
         let usuariosEncontrados = res.json();
         let usuarioLogin;
-        usuariosEncontrados.some(function(usuario) {
+        usuariosEncontrados.some(function (usuario) {
           if (usuario.correo == formulario.value.correo) {
             usuarioLogin = usuario;
             return true;
           }
         });
-        if(usuarioLogin){
+        if (usuarioLogin) {
           // this.Passwords.checkPassword({
           //   passwordAttempt: formulario.value.password,
           //   encryptedPassword: usuarioLogin.password
@@ -54,9 +54,10 @@ export class UsuarioComponent implements OnInit {
           //   // OK.
           //   success: function () {
           //     this.forms.errorLogin = false;
-              this._userLogged.idUsuario = usuarioLogin.id;
-              console.log(this._userLogged.idUsuario);
-              this._router.navigateByUrl('home');
+          this._userLogged.idUsuario = usuarioLogin.id;
+          this._userLogged.idCarrito = usuarioLogin.idCarrito;
+          console.log(this._userLogged.idUsuario);
+          this._router.navigateByUrl('home');
           //   },
           // });
         }
@@ -82,6 +83,7 @@ export class UsuarioComponent implements OnInit {
             console.log(res);
             this.nuevoUsuario = {};
             this._userLogged.idUsuario = res.json().id;
+            this._userLogged.idCarrito = carrito.id;
             console.log(this._userLogged.idUsuario);
             this._router.navigateByUrl('home');
           },

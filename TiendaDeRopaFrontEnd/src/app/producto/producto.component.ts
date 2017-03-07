@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Http, Response} from "@angular/http";
 import {MasterUrlService} from "../services/master-url.service";
 import {NgForm} from "@angular/forms";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-producto',
@@ -19,7 +20,7 @@ export class ProductoComponent implements OnInit {
   // disabledButtons = {
   //   NuevatiendaFormSubmitButton: false
   // }
-  constructor(private _activatedRoute: ActivatedRoute, private _http:Http, private _masterURL:MasterUrlService) {}
+  constructor(private _activatedRoute: ActivatedRoute, private _http:Http, private _masterURL:MasterUrlService, private _userService:UserService) {}
 
   ngOnInit() {
     this._activatedRoute
@@ -28,10 +29,10 @@ export class ProductoComponent implements OnInit {
         this._parametros = parametros;
 
         // Peticion de productos
-        this._http.get(this._masterURL.url + "Producto").subscribe(
-          // this._http.get(this._masterURL.url+'Usuario?idBorrachera='+this._parametros.idBorrachera).subscribe(
+        this._http.get(this._masterURL.url + "Producto?idCategoria=" + this._parametros.idCategoria).subscribe(
           (res:Response)=>{
             this.productos = res.json().map((value)=>{
+              value.textoAuxiliar = "";
               value.formularioCerrado = true;
               return value;
             });;
@@ -43,11 +44,7 @@ export class ProductoComponent implements OnInit {
         // Peticion de categorias
         this._http.get(this._masterURL.url + "Categoria").subscribe(
           (res: Response) => {
-            this.categorias = res.json()
-              .map((value)=>{
-                value.idformularioCerrado = true;
-                return value;
-              });
+            this.categorias = res.json();
           },
           (err) => {
             console.log(err);
@@ -111,6 +108,20 @@ export class ProductoComponent implements OnInit {
       },
       (err)=>{
         console.log("Error: ",err)
+      }
+    )
+  }
+
+  productoAlCarrito(producto: any){
+    this._http.post(this._masterURL.url+'Detalle',{
+      idCarrito: this._userService.idCarrito,
+      idProducto: producto.id
+    }).subscribe(
+      (res:Response)=>{
+        producto.textoAuxiliar = "Añadido al carrito"
+      },
+      (err)=>{
+        console.log(err)
       }
     )
   }

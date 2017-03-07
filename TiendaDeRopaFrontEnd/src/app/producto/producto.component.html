@@ -26,7 +26,7 @@
 
           <select class="form-control" name="idCategoria" [(ngModel)]="nuevoProducto.idCategoria">
             <option *ngFor="let categoria of categorias" value='{{categoria.id}}'>
-              {{categoria.nombre}}
+              {{categoria.nombreCategoria}}
             </option>
           </select>
         </div>
@@ -38,14 +38,17 @@
 
       <table class="table table-responsive table-striped center" style="text-align:center;">
         <tr>
-          <th><h2>Imagen</h2></th>
-          <th><h2>Nombre Producto</h2></th>
-          <th><h2>Precio</h2></th>
+          <th><h4><b>Imagen</b></h4></th>
+          <th><h4><b>Nombre Producto</b></h4></th>
+          <th><h4><b>Precio</b></h4></th>
+          <th></th>
         </tr>
         <tr *ngFor="let producto of productos">
           <td><img src="assets/Productos/{{producto.foto}}" style="height: 150px; width: 150px;" alt="Responsive image" class="img-thumbnail"></td>
-          <td>h3{{producto.nombreProducto}} </td>
-          <td>{{producto.precio}} </td>
+          <td><h4>{{producto.nombreProducto}}</h4></td>
+          <td><h4>{{producto.precio}}</h4></td>
+          <td><a class="btn btn-warning" (click)="productoAlCarrito(producto)">Añadir al carrito</a>
+            <br><p>{{producto.textoAuxiliar}}</p></td>
         </tr>
       </table>
 
