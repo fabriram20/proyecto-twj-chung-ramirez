@@ -1,0 +1,107 @@
+<div class="container">
+
+
+  <div class="form-group jumbotron">
+    <h1>Crear Usuario</h1>
+    <form class="animated bounceIn" (ngSubmit)="crearUsuario(NuevoUsuarioForm)" #NuevoUsuarioForm="ngForm">
+
+      <label>Nombre de Usuario</label>
+      <input type="text" class="form-control" name="nombre" placeholder="Ingrese su nombre"
+             [(ngModel)]="nuevoUsuario.nombre">
+      <label>Ciudad de Residencia</label>
+      <input type="text" class="form-control" placeholder="Ingrese su ciudad de Residencia" name="ciudadResidencia"
+             [(ngModel)]="nuevoUsuario.ciudadResidencia">
+      <label>Fecha de Nacimiento</label>
+      <input type="date" class="form-control" placeholder="Ingrese su fecha de nacimiento" name="fechaNacimiento"
+             [(ngModel)]="nuevoUsuario.fechaNacimiento">
+
+      <!--<label>Borrachera: </label>-->
+      <!--<select class="form-control" name="idBorrachera">-->
+      <!--<% for(var i=0; i<borracheras.length; i++){ %>-->
+      <!--<option value='<%=borracheras[i].id%>'>-->
+      <!--<%=borracheras[i].motivo%>-->
+      <!--</option>-->
+      <!--<%  } %>-->
+      <!--</select>-->
+
+      <label>Borrachera: </label>
+      <select class="form-control" name="idBorrachera" >
+        <option *ngFor="let borrachera of borracheras" value='{{borrachera.id}}'>
+          {{borrachera.motivo}}
+        </option>
+      </select>
+
+      <br>
+
+      <button class="submit" class="btn btn-block btn-success">Crear Usuario</button>
+
+    </form>
+  </div>
+
+  <!--Actualizar y borrar-->
+  <div class="form-group jumbotron">
+    <h2>Lista de Usuarios</h2>
+    <div class="row">
+      <div class="col-sm-12 animated flipInX" *ngFor="let usuario of usuarios">
+
+        <!--Usuarios Existentes-->
+        <div class="text-center">
+          <h3>ID: {{usuario.id}} {{usuario.nombre}}</h3>
+          <p>Cumple: {{usuario.fechaNacimiento}}</p>
+          <p>Ciudad: {{usuario.ciudadResidencia}}</p>
+        </div>
+
+        <div class="row animated flipInX" [hidden]="!usuario.formularioCerrado">
+          <div class="col-sm-5">
+            <button class="btn btn-block btn-info" (click)="usuario.formularioCerrado = !usuario.formularioCerrado">
+              Actualizar
+            </button>
+          </div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-5">
+            <button class="btn btn-block btn-danger" (click)="borrarUsuario(usuario.id)">Borrar</button>
+          </div>
+        </div>
+
+        <div class="div" [hidden]="usuario.formularioCerrado">
+          <form class="animated bounceIn" (ngSubmit)="actualizarUsuario(usuario)" #NuevaTiendaForm="ngForm">
+            <div class="form-group">
+
+              <label>Nombre de Usuario</label>
+              <input type="text" class="form-control" name="nombre" placeholder="Ingrese su nombre"
+                     [(ngModel)]="usuario.nombre">
+              <label>Ciudad de Residencia</label>
+              <input type="text" class="form-control" placeholder="Ingrese su ciudad de Residencia"
+                     name="ciudadResidencia"
+                     [(ngModel)]="usuario.ciudadResidencia">
+              <label>Fecha de Nacimiento</label>
+              <input type="date" class="form-control" placeholder="Ingrese su fecha de nacimiento"
+                     name="fechaNacimiento"
+                     [(ngModel)]="usuario.fechaNacimiento">
+              <label>Borrachera: </label>
+              <select class="form-control" name="idBorrachera" >
+                <option *ngFor="let borrachera of borracheras" value='{{borrachera.id}}'>
+                  {{borrachera.motivo}}
+                </option>
+              </select>
+              <br>
+            </div>
+
+            <button [disabled]="disabledButtons.NuevaTiendaFormSubmitButton||!NuevaTiendaForm.valid" type="submit"
+                    class="btn btn-block btn-success">Actualizar
+            </button>
+            <button type="button" class="btn btn-block btn-warning"
+                    (click)="usuario.formularioCerrado = !usuario.formularioCerrado ">
+              Cancelar
+            </button>
+          </form>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
