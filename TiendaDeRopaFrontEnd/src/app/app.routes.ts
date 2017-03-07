@@ -9,8 +9,9 @@ import {CarritoComponent} from "./carrito/carrito.component";
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
-  {path: 'categorias', component: CategoriaComponent},
-  {path: 'categorias/:idCategoria/productos', component: ProductoComponent},
+  {path: 'categoria', component: CategoriaComponent},
+  {path: 'categorias/:idCategoria/producto', component: ProductoComponent},
+  {path: 'producto', component: ProductoComponent},
   {path: 'login', component: UsuarioComponent},
   {path: 'carrito', component: CarritoComponent},
 ];

@@ -1,3 +1,79 @@
-<p>
-  categoria works!
-</p>
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-sm-1"></div>
+
+    <!--Listado de Productos-->
+    <div class="col-sm-7">
+      <form class="animated bounceIn" action="/producto">
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="thumbnail">
+              <img src="assets/Productos/Niño.jpg" class="img-responsive img-rounded center-block"
+                   alt="Responsive banner" style="max-width: 100%; height: auto; display: block;">
+              <div class="caption">
+                <h3>Niños</h3>
+                <p>Aqui podras encontrar una gran variedad de articulos para el campeón de la casa</p>
+                <p><a [routerLink]="['/productos']" class="btn btn-primary" role="button">Visitar</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="thumbnail">
+              <img src="assets/Productos/Niña.jpg" class="img-responsive img-rounded center-block"
+                   alt="Responsive banner" style="max-width: 100%; height: auto; display: block;">
+              <div class="caption">
+                <h3>Niñas</h3>
+                <p>Aqui podras encontrar una gran variedad de articulos para las princesas de la casa</p>
+                <p><a [routerLink]="['productos']" class="btn btn-primary" role="button">Visitar</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="thumbnail">
+              <img src="assets/Productos/Hombre.jpg" class="img-responsive img-rounded center-block"
+                   alt="Responsive banner" style="max-width: 100%; height: auto; display: block;">
+              <div class="caption">
+                <h3>Hombres</h3>
+                <p>Aqui podras encontrar una gran variedad de articulos!</p>
+                <p><a [routerLink]="['productos']" class="btn btn-primary" role="button">Visitar</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="thumbnail">
+              <img src="assets/Productos/Mujer.jpg" class="img-responsive img-rounded center-block"
+                   alt="Responsive banner" style="max-width: 100%; height: auto; display: block;">
+              <div class="caption">
+                <h3>Mujeres</h3>
+                <p>Aqui podras encontrar una gran variedad de articulos!</p>
+                <p><a [routerLink]="['productos']" class="btn btn-primary" role="button">Visitar</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </form>
+
+
+    </div>
+
+    <div class="col-sm-4">
+      <div class="row"><img src="assets/Promociones/oferta2.jpg" class="img-responsive center-block"
+                            alt="Responsive banner" style="max-width: 100%; height: auto; display: block;"></div>
+      <div class="row"><img src="assets/Promociones/vertical.jpg" class="img-responsive center-block"
+                            alt="Responsive banner" style="max-width: 100%; height: auto; display: block;"></div>
+
+    </div>
+
+
+  </div>
+
+
+</div>
