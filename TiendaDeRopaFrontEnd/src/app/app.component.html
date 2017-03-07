@@ -52,7 +52,9 @@
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+            <ul class="nav navbar-nav navbar-left" *ngFor="let categoria of categorias">
+              <li><a [routerLink]="['categorias',categoria.id,'productos']">{{categoria.nombreCategoria}}</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a [routerLink]="['registro']">Registro</a></li>
             </ul>

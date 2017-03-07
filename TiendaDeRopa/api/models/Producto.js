@@ -9,15 +9,15 @@ module.exports = {
 
   attributes: {
     nombreProducto: {
-      type: string,
+      type: 'string',
       required: true
     },
     foto: {
-      type: string,
+      type: 'string',
       defaultsTo: "blank.jpg"
     },
     precio: {
-      type: number,
+      type: 'number',
       required: true
     },
     idCategoria: {
