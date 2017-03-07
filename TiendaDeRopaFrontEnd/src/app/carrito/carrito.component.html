@@ -2,36 +2,58 @@
   <div class="row">
     <!--Datos cliente - Total-->
     <div class="col-sm-2">
-      <img src="assets/Promociones/vertical2.jpg" class="img-responsive center-block"
+      <div class="well clearfix" [hidden]="!hidden.sesionIniciada">
+        <b>Datos del cliente:</b><br>
+        <b>Nombres: </b>{{cliente.nombres}}<br>
+        <b>Apellidos: </b>{{cliente.apellidos}}<br>
+      </div>
+      <img src="assets/images/bannerFormasPago.png" class="img-responsive center-block"
            alt="Responsive banner" style="max-width: 100%; height: auto; display: block;">
     </div>
 
     <!--Listado de Productos-->
     <div class="col-sm-8">
-      <h1>Carrito de Compras</h1>
+      <div [hidden]="!hidden.sesionIniciada">
+        <h1>Carrito de Compras</h1>
 
-      <!--Listar Producto-->
+        <!--Listar Producto-->
 
-      <table class="table table-responsive table-striped center" style="text-align:center;">
-        <tr>
-          <th><h4><b>Imagen</b></h4></th>
-          <th><h4><b>Nombre Producto</b></h4></th>
-          <th><h4><b>Precio</b></h4></th>
-          <th></th>
-        </tr>
-        <tr *ngFor="let producto of productos">
-          <td><img src="assets/Productos/{{producto.foto}}" style="height: 150px; width: 150px;" alt="Responsive image" class="img-thumbnail"></td>
-          <td><h4>{{producto.nombreProducto}}</h4></td>
-          <td><h4>{{producto.precio}}</h4></td>
-          <td><a class="btn btn-warning" (click)="quitarDelCarrito(producto.id)">Quitar del carrito</a></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><h4><b>TOTAL:</b></h4></td>
-          <td><h4>{{total}}</h4></td>
-          <td><a class="btn btn-success">Check Out</a></td>
-        </tr>
-      </table>
+        <table [hidden]="hidden.carritoVacio" class="table table-responsive table-striped center" style="text-align:center;">
+          <tr>
+            <th><h4><b>Imagen</b></h4></th>
+            <th><h4><b>Nombre Producto</b></h4></th>
+            <th><h4><b>Precio</b></h4></th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let producto of productos">
+            <td><img src="assets/Productos/{{producto.foto}}" style="height: 150px; width: 150px;"
+                     alt="Responsive image" class="img-thumbnail"></td>
+            <td><h4>{{producto.nombreProducto}}</h4></td>
+            <td><h4>{{producto.precio}}</h4></td>
+            <td><a class="btn btn-warning" (click)="quitarDelCarrito(producto.id)">Quitar del carrito</a></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><h4><b>TOTAL:</b></h4></td>
+            <td><h4>{{total}}</h4></td>
+            <td><a class="btn btn-success">Check Out</a></td>
+          </tr>
+        </table>
+        <div [hidden]="!hidden.carritoVacio">
+          <div class="jumbotron text-center">
+            <h2>Su carrito está vacío</h2>
+            <br>
+            <a class="btn btn-info" [routerLink]="['/categorias']">Buscar productos</a>
+          </div>
+        </div>
+      </div>
+      <div [hidden]="hidden.sesionIniciada">
+        <div class="jumbotron text-center">
+          <h2>No ha iniciado sesión</h2>
+          <br>
+          <a class="btn btn-info" [routerLink]="['/login']">Iniciar Sesión</a>
+        </div>
+      </div>
     </div>
 
     <!--Ofertas y publciidad-->

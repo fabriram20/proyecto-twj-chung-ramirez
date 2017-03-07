@@ -14,7 +14,7 @@
       <h1>Productos</h1>
 
       <!--Crear producto-->
-      <form class="animated bounceIn" (ngSubmit)="crearProducto(NuevoProductoForm)" #NuevoProductoForm="ngForm">
+      <form class="animated fadeIn" (ngSubmit)="crearProducto(NuevoProductoForm)" #NuevoProductoForm="ngForm">
         <div class="form-group jumbotron">
           <label>Nombre Producto</label>
           <input type="text" placeholder="Ingrese nombre producto" class="form-control" name="nombreProducto" [(ngModel)]="nuevoProducto.nombreProducto">

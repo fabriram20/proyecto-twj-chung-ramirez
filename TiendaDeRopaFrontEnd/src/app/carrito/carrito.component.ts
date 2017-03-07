@@ -9,7 +9,7 @@ import {UserService} from "../services/user.service";
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent implements OnInit {
-
+  cliente = {};
   productos = [];
   total: number;
   hidden = {
@@ -27,7 +27,9 @@ export class CarritoComponent implements OnInit {
       this._http.get(this._masterURL.url + "Carrito/" + this._userService.idCarrito + "/productos").subscribe(
         (res: Response) => {
           this.productos = res.json();
-          this.hidden.carritoVacio = false;
+          if(this.productos.length > 0){
+            this.hidden.carritoVacio = false;
+          }
           this.total = 0;
           for (let producto of this.productos) {
             this.total += producto.precio;
@@ -37,7 +39,14 @@ export class CarritoComponent implements OnInit {
           console.log(err);
         }
       );
-    }
+      this._http.get(this._masterURL.url + "Usuario/" + this._userService.idUsuario).subscribe(
+        (res: Response) => {
+          this.cliente = res.json();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );    }
   }
 
   quitarDelCarrito(id: number) {
@@ -45,6 +54,9 @@ export class CarritoComponent implements OnInit {
       (res) => {
         let nuevaLista = res.json();
         this.productos = nuevaLista.productos;
+        if(this.productos.length == 0){
+          this.hidden.carritoVacio = true;
+        }
       },
       (err) => {
         console.log(err);
