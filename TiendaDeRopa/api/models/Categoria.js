@@ -9,7 +9,7 @@ module.exports = {
 
   attributes: {
     nombre: {
-      type: String,
+      type: 'string',
       enum: ['Mujer', 'Hombre', 'Niña', 'Niño']
     },
     productos: {

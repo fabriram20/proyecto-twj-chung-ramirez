@@ -1,113 +1,59 @@
-<<<<<<< HEAD
+
 <div class="container">
 
+  <div class="row">
 
-  <div class="form-group jumbotron">
-    <h1>Crear Usuario</h1>
-    <form class="animated bounceIn" (ngSubmit)="crearUsuario(NuevoUsuarioForm)" #NuevoUsuarioForm="ngForm">
+    <!--Datos cliente - Total-->
+    <div class="col-sm-3"></div>
 
-      <label>Nombre de Usuario</label>
-      <input type="text" class="form-control" name="nombre" placeholder="Ingrese su nombre"
-             [(ngModel)]="nuevoUsuario.nombre">
-      <label>Ciudad de Residencia</label>
-      <input type="text" class="form-control" placeholder="Ingrese su ciudad de Residencia" name="ciudadResidencia"
-             [(ngModel)]="nuevoUsuario.ciudadResidencia">
-      <label>Fecha de Nacimiento</label>
-      <input type="date" class="form-control" placeholder="Ingrese su fecha de nacimiento" name="fechaNacimiento"
-             [(ngModel)]="nuevoUsuario.fechaNacimiento">
+    <!--Listado de Productos-->
+    <div class="col-sm-6">
+      <h1>Productos</h1>
 
-      <!--<label>Borrachera: </label>-->
-      <!--<select class="form-control" name="idBorrachera">-->
-      <!--<% for(var i=0; i<borracheras.length; i++){ %>-->
-      <!--<option value='<%=borracheras[i].id%>'>-->
-      <!--<%=borracheras[i].motivo%>-->
-      <!--</option>-->
-      <!--<%  } %>-->
-      <!--</select>-->
-
-      <label>Borrachera: </label>
-      <select class="form-control" name="idBorrachera" >
-        <option *ngFor="let borrachera of borracheras" value='{{borrachera.id}}'>
-          {{borrachera.motivo}}
-        </option>
-      </select>
-
-      <br>
-
-      <button class="submit" class="btn btn-block btn-success">Crear Usuario</button>
-
-    </form>
-  </div>
-
-  <!--Actualizar y borrar-->
-  <div class="form-group jumbotron">
-    <h2>Lista de Usuarios</h2>
-    <div class="row">
-      <div class="col-sm-12 animated flipInX" *ngFor="let usuario of usuarios">
-
-        <!--Usuarios Existentes-->
-        <div class="text-center">
-          <h3>ID: {{usuario.id}} {{usuario.nombre}}</h3>
-          <p>Cumple: {{usuario.fechaNacimiento}}</p>
-          <p>Ciudad: {{usuario.ciudadResidencia}}</p>
+      <!--Crear producto-->
+      <form class="animated bounceIn" (ngSubmit)="crearProducto(NuevoProductoForm)" #NuevoProductoForm="ngForm">
+        <div class="form-group jumbotron">
+          <label>Nombre Producto</label>
+          <input type="text" placeholder="Ingrese nombre producto" class="form-control" name="nombreProducto" [(ngModel)]="nuevoProducto.nombreProducto">
+          <label> Foto </label>
+          <input type="text" placeholder="Ingrese foto" class="form-control" name="foto" [(ngModel)]="nuevoProducto.foto">
+          <label> Precio</label>
+          <input type="number" placeholder="Ingrese precio" class="form-control" name="precio" [(ngModel)]="nuevoProducto.precio">
         </div>
+        <button  type="submit" class="btn btn-block btn-success">Crear Producto</button>
+      </form>
 
-        <div class="row animated flipInX" [hidden]="!usuario.formularioCerrado">
-          <div class="col-sm-5">
-            <button class="btn btn-block btn-info" (click)="usuario.formularioCerrado = !usuario.formularioCerrado">
-              Actualizar
-            </button>
-          </div>
-          <div class="col-sm-2"></div>
-          <div class="col-sm-5">
-            <button class="btn btn-block btn-danger" (click)="borrarUsuario(usuario.id)">Borrar</button>
-          </div>
-        </div>
+      <!--Listar Producto-->
 
-        <div class="div" [hidden]="usuario.formularioCerrado">
-          <form class="animated bounceIn" (ngSubmit)="actualizarUsuario(usuario)" #NuevaTiendaForm="ngForm">
-            <div class="form-group">
 
-              <label>Nombre de Usuario</label>
-              <input type="text" class="form-control" name="nombre" placeholder="Ingrese su nombre"
-                     [(ngModel)]="usuario.nombre">
-              <label>Ciudad de Residencia</label>
-              <input type="text" class="form-control" placeholder="Ingrese su ciudad de Residencia"
-                     name="ciudadResidencia"
-                     [(ngModel)]="usuario.ciudadResidencia">
-              <label>Fecha de Nacimiento</label>
-              <input type="date" class="form-control" placeholder="Ingrese su fecha de nacimiento"
-                     name="fechaNacimiento"
-                     [(ngModel)]="usuario.fechaNacimiento">
-              <label>Borrachera: </label>
-              <select class="form-control" name="idBorrachera" >
-                <option *ngFor="let borrachera of borracheras" value='{{borrachera.id}}'>
-                  {{borrachera.motivo}}
-                </option>
-              </select>
-              <br>
+      <div class="form-group jumbotron">
+        <h2>Lista de Productos</h2>
+        <div class="row">
+          <div class="col-sm-12 animated flipInX" *ngFor="let producto of productos">
+
+            <!--Usuarios Existentes-->
+            <div class="text-center">
+              <p> {{producto.foto}} {{producto.nombreProducto}} {{producto.precio}} </p>
             </div>
 
-            <button [disabled]="disabledButtons.NuevaTiendaFormSubmitButton||!NuevaTiendaForm.valid" type="submit"
-                    class="btn btn-block btn-success">Actualizar
-            </button>
-            <button type="button" class="btn btn-block btn-warning"
-                    (click)="usuario.formularioCerrado = !usuario.formularioCerrado ">
-              Cancelar
-            </button>
-          </form>
 
+
+
+          </div>
         </div>
-
-
       </div>
+
+
+
+
+
+
     </div>
+
+    <!--Ofertas y publciidad-->
+    <div class="col-sm-3"></div>
+
   </div>
 
 
 </div>
-=======
-<p>
-  producto works!
-</p>
->>>>>>> refs/remotes/origin/master

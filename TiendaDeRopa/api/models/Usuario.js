@@ -31,7 +31,7 @@ module.exports = {
       type: 'string',
       required: true
     },
-    carrito: {
+    idCarrito: {
       model: "Carrito",
       unique: true
     }
