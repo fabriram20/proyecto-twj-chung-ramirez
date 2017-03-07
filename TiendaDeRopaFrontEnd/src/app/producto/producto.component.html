@@ -14,7 +14,7 @@
       <h1>Productos</h1>
 
       <!--Crear producto-->
-      <form class="animated fadeIn" (ngSubmit)="crearProducto(NuevoProductoForm)" #NuevoProductoForm="ngForm">
+      <form class="animated fadeIn" [hidden]="!admin" (ngSubmit)="crearProducto(NuevoProductoForm)" #NuevoProductoForm="ngForm">
         <div class="form-group jumbotron">
           <label>Nombre Producto</label>
           <input type="text" placeholder="Ingrese nombre producto" class="form-control" name="nombreProducto" [(ngModel)]="nuevoProducto.nombreProducto">
@@ -39,7 +39,7 @@
       <table class="table table-responsive table-striped center" style="text-align:center;">
         <tr>
           <th><h4><b>Imagen</b></h4></th>
-          <th><h4><b>Nombre Producto</b></h4></th>
+          <th><h4><b>Nombre del Producto</b></h4></th>
           <th><h4><b>Precio</b></h4></th>
           <th></th>
         </tr>
@@ -47,8 +47,35 @@
           <td><img src="assets/Productos/{{producto.foto}}" style="height: 150px; width: 150px;" alt="Responsive image" class="img-thumbnail"></td>
           <td><h4>{{producto.nombreProducto}}</h4></td>
           <td><h4>{{producto.precio}}</h4></td>
-          <td><a class="btn btn-warning" (click)="productoAlCarrito(producto)">Añadir al carrito</a>
-            <br><p>{{producto.textoAuxiliar}}</p></td>
+          <td><a class="btn btn-block btn-warning" (click)="productoAlCarrito(producto)">Añadir al carrito</a>
+            <br><p>{{producto.textoAuxiliar}}</p>
+            <div [hidden]="!admin||!producto.formularioCerrado">
+            <button class="btn btn-block btn-info" (click)="producto.formularioCerrado = !producto.formularioCerrado">Editar</button>
+            <button class="btn btn-block btn-danger" (click)="borrarItem(producto.id)">Borrar</button>
+            </div>
+            <div [hidden]="producto.formularioCerrado">
+              <form class="animated fadeIn" (ngSubmit)="actualizarProducto(EditarProductoForm)" #EditarProductoForm="ngForm">
+                <div class="form-group jumbotron">
+                  <label>Nombre Producto</label>
+                  <input type="text" placeholder="Ingrese nombre producto" class="form-control" name="nombreProducto" [(ngModel)]="producto.nombreProducto">
+                  <label> Foto </label>
+                  <input type="text" placeholder="Ingrese foto" class="form-control" name="foto" [(ngModel)]="producto.foto">
+                  <label> Precio</label>
+                  <input type="number" step="0.01" placeholder="Ingrese precio" class="form-control" name="precio" [(ngModel)]="producto.precio">
+                  <label> Categoria: </label>
+
+                  <select class="form-control" name="idCategoria">
+                    <option *ngFor="let categoria of categorias" value='{{categoria.id}}' [selected]="categoria.id == producto.idCategoria">
+                      {{categoria.nombreCategoria}}
+                    </option>
+                  </select>
+                </div>
+                <button  type="submit" class="btn btn-block btn-success">Actualizar Producto</button>
+                <button  (click)="producto.formularioCerrado = !producto.formularioCerrado" class="btn btn-block btn-danger">Cancelar</button>
+                <br>
+              </form>
+            </div>
+          </td>
         </tr>
       </table>
     </div>

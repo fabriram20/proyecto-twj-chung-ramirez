@@ -11,7 +11,7 @@ import {UserService} from "../services/user.service";
   styleUrls: ['./producto.component.css']
 })
 export class ProductoComponent implements OnInit {
-
+  admin = false;
   private _parametros: any;
   nuevoProducto = {};
   productos = [];
@@ -53,6 +53,10 @@ export class ProductoComponent implements OnInit {
           }
         )
       })
+    // Comprobar idUsuario
+    if(this._userService.idUsuario == 1){
+      this.admin = true;
+    }
   }
 
   crearProducto(formulario: NgForm) {
@@ -85,24 +89,24 @@ export class ProductoComponent implements OnInit {
   }
 
 
-  actualizarUsuario(producto: any) {
+  actualizarProducto(producto: any) {
     let parametros = {
       nombreProducto: producto.value.nombreProducto,
       foto: producto.value.foto,
       precio: producto.value.precio,
-      idCategoria: producto.value.idcategoria
+      idCategoria: producto.value.idCategoria
     };
 
-    console.log(parametros.idCategoria);
-    if (parametros.idCategoria.equals('Hombre')) {
-      parametros.foto = 'Hombre.jpg';
-    } else if (parametros.idCategoria = 'Mujer') {
-      parametros.foto = 'Mujer.jpg';
-    } else if (parametros.idCategoria = 'Niño') {
-      parametros.foto = 'Niño.jpg';
-    } else {
-      parametros.foto = 'Niña.jpg';
-    }
+    // console.log(parametros.idCategoria);
+    // if (parametros.idCategoria.equals('Hombre')) {
+    //   parametros.foto = 'Hombre.jpg';
+    // } else if (parametros.idCategoria = 'Mujer') {
+    //   parametros.foto = 'Mujer.jpg';
+    // } else if (parametros.idCategoria = 'Niño') {
+    //   parametros.foto = 'Niño.jpg';
+    // } else {
+    //   parametros.foto = 'Niña.jpg';
+    // }
 
 
     this._http.put(this._masterURL.url + "Producto/" + producto.id, parametros).subscribe(
