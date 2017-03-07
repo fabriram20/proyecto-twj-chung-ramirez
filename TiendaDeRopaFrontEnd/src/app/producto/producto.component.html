@@ -28,9 +28,23 @@
           </select>
         </div>
         <button  type="submit" class="btn btn-block btn-success">Crear Producto</button>
+        <br>
       </form>
 
       <!--Listar Producto-->
+
+      <table class="table table-responsive table-bordered">
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre Producto</th>
+          <th>Precio</th>
+        </tr>
+        <tr *ngFor="let producto of productos">
+          <td>{{producto.foto}}</td>
+          <td>{{producto.nombreProducto}} </td>
+          <td>{{producto.precio}} </td>
+        </tr>
+      </table>
 
 
       <div class="form-group jumbotron">
@@ -42,10 +56,6 @@
             <div class="text-center">
               <p> {{producto.foto}} {{producto.nombreProducto}} {{producto.precio}} </p>
             </div>
-
-
-
-
           </div>
         </div>
       </div>
