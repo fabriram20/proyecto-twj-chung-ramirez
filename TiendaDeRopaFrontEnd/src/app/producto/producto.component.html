@@ -40,7 +40,7 @@
           <th>Precio</th>
         </tr>
         <tr *ngFor="let producto of productos">
-          <td>{{producto.foto}}</td>
+          <td><img src="assets/{{producto.foto}}" style="height: 150px; width: 150px;" alt="Responsive image"></td>
           <td>{{producto.nombreProducto}} </td>
           <td>{{producto.precio}} </td>
         </tr>
