@@ -91,8 +91,19 @@ export class ProductoComponent implements OnInit {
       nombreProducto:producto.value.nombreProducto,
       foto:producto.value.foto,
       precio:producto.value.precio,
-      idcategoria:producto.value.idcategoria
+      idCategoria:producto.value.idcategoria
     };
+
+    console.log(parametros.idCategoria);
+    if(parametros.idCategoria.equals('Hombre')){
+      parametros.foto='Hombre.jpg';
+    }else if(parametros.idCategoria='Mujer'){
+      parametros.foto='Mujer.jpg';
+    }else if(parametros.idCategoria='Niño'){
+      parametros.foto='Niño.jpg';
+    }else{parametros.foto='Niña.jpg';}
+
+
     this._http.put(this._masterURL.url+"Producto/"+producto.id,parametros).subscribe(
       (res:Response)=>{
         producto.formularioCerrado = !producto.formularioCerrado;

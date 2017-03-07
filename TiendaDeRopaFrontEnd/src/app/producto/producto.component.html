@@ -33,15 +33,15 @@
 
       <!--Listar Producto-->
 
-      <table class="table table-responsive table-bordered">
+      <table class="table table-responsive table-striped center" style="text-align:center;">
         <tr>
-          <th>Imagen</th>
-          <th>Nombre Producto</th>
-          <th>Precio</th>
+          <th><h2>Imagen</h2></th>
+          <th><h2>Nombre Producto</h2></th>
+          <th><h2>Precio</h2></th>
         </tr>
         <tr *ngFor="let producto of productos">
-          <td><img src="assets/{{producto.foto}}" style="height: 150px; width: 150px;" alt="Responsive image"></td>
-          <td>{{producto.nombreProducto}} </td>
+          <td><img src="assets/Productos/{{producto.foto}}" style="height: 150px; width: 150px;" alt="Responsive image" class="img-thumbnail"></td>
+          <td>h3{{producto.nombreProducto}} </td>
           <td>{{producto.precio}} </td>
         </tr>
       </table>
