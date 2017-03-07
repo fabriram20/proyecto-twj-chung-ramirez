@@ -1,6 +1,6 @@
 # proyecto-twj-chung-ramirez
 
-## Tienda de Ropa: Fedora Fasion
+## Tienda de Ropa: Fedora Fashion
 
 ### Mockups
 
