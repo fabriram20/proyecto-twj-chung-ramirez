@@ -17,7 +17,7 @@ module.exports = {
       defaultsTo: "blank.jpg"
     },
     precio: {
-      type: 'number',
+      type: 'float',
       required: true
     },
     idCategoria: {

@@ -40,7 +40,6 @@ export class ProductoComponent implements OnInit {
             console.log(err);
           }
         )
-
         // Peticion de categorias
         this._http.get(this._masterURL.url + "Categoria").subscribe(
           (res: Response) => {
@@ -58,13 +57,10 @@ export class ProductoComponent implements OnInit {
   }
 
   crearProducto(formulario: NgForm){
-    let producto = {
-      nombreProducto:formulario.value.nombreProducto,
-      //foto:formulario.value.foto,
-      precio:formulario.value.precio,
-      //idcategoria:formulario.value.idcategoria
-    }
-    this._http.post(this._masterURL.url+'Producto', producto).subscribe(
+
+    console.log(this.nuevoProducto);
+
+    this._http.post(this._masterURL.url+'Producto',this.nuevoProducto).subscribe(
       (res:Response)=>{
         this.productos.push(res.json());
         this.nuevoProducto={};

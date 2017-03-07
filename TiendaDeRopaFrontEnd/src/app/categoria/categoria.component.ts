@@ -41,14 +41,14 @@ export class CategoriaComponent implements OnInit {
       })
   }
 
-  crearProducto(formulario: NgForm){
-    let categoria = {
-      nombre:formulario.value.nombre
-    }
-    this._http.post(this._masterURL.url+'Categoria', categoria).subscribe(
+  crearCategoria(formulario: NgForm){
+
+    console.log(this.nuevaCategoria);
+
+    this._http.post(this._masterURL.url+'Categoria', this.nuevaCategoria).subscribe(
       (res:Response)=>{
-        this.productos.push(res.json());
-        this.nuevoProducto={};
+        this.categorias.push(res.json());
+        this.nuevaCategoria={};
         // this.disabledButtons.NuevatiendaFormSubmitButton = false;
       },
       (err)=>{
@@ -59,32 +59,13 @@ export class CategoriaComponent implements OnInit {
   }
 
   borrarProducto(id:number) {
-    this._http.delete(this._masterURL.url + "Producto/" + id).subscribe(
+    this._http.delete(this._masterURL.url + "Categoria/" + id).subscribe(
       (res) => {
-        let productoBorrado=res.json();
-        this.productos = this.productos.filter(value=>productoBorrado.id!=value.id)
+        let categoriaBorrada=res.json();
+        this.categorias = this.categorias.filter(value=>categoriaBorrada.id!=value.id)
       },
       (err) => {
         console.log(err);
-      }
-    )
-  }
-
-
-  actualizarUsuario(producto:any){
-    let parametros={
-      nombreProducto:producto.value.nombreProducto,
-      foto:producto.value.foto,
-      precio:producto.value.precio,
-      idcategoria:producto.value.idcategoria
-    };
-    this._http.put(this._masterURL.url+"Producto/"+producto.id,parametros).subscribe(
-      (res:Response)=>{
-        producto.formularioCerrado = !producto.formularioCerrado;
-        console.log("Respuesta: ",res.json());
-      },
-      (err)=>{
-        console.log("Error: ",err)
       }
     )
   }

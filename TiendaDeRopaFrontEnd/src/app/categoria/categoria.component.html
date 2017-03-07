@@ -9,11 +9,11 @@
       <h1>Categoria</h1>
 
       <!--Crear producto-->
-      <form class="animated bounceIn" (ngSubmit)="crearProducto(NuevoProductoForm)" #NuevoProductoForm="ngForm">
+      <form class="animated bounceIn" (ngSubmit)="crearCategoria(NuevoProductoForm)" #NuevoProductoForm="ngForm">
         <div class="form-group jumbotron">
           <label>Nombre Categoria</label>
-          <select class="form-control" name="nombre" >
-            <option value='Hombre'>Hombre</option>
+          <select class="form-control" name="nombre" [(ngModel)]="nuevaCategoria.nombre">
+            <option value='Hombre' selected>Hombre</option>
             <option value='Mujer'>Mujer</option>
             <option value='Niño'>Niño</option>
             <option value='Niña'>Niña</option>
