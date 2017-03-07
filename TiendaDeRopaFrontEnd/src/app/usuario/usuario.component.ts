@@ -5,17 +5,20 @@ import {NgForm} from "@angular/forms";
 import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
 
+// declare function require(name:string);
+
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.css']
 })
 export class UsuarioComponent implements OnInit {
-
+  // Passwords = require('machinepack-passwords');
   inicioUsuario = {};
   nuevoUsuario = {};
   forms = {
-    mostrarNuevoClienteForm: false
+    mostrarNuevoClienteForm: false,
+    errorLogin: false
   };
 
   constructor(private _http: Http, private _masterURL: MasterUrlService, private _userLogged: UserService, private _router: Router) {
@@ -27,7 +30,36 @@ export class UsuarioComponent implements OnInit {
   iniciarSesion(formulario: NgForm) {
     this._http.get(this._masterURL.url + "Usuario").subscribe(
       (res) => {
-        console.log(res.json());
+        let usuariosEncontrados = res.json();
+        let usuarioLogin;
+        usuariosEncontrados.some(function(usuario) {
+          if (usuario.correo == formulario.value.correo) {
+            usuarioLogin = usuario;
+            return true;
+          }
+        });
+        if(usuarioLogin){
+          // this.Passwords.checkPassword({
+          //   passwordAttempt: formulario.value.password,
+          //   encryptedPassword: usuarioLogin.password
+          // }).exec({
+          //   // An unexpected error occurred.
+          //   error: function (err) {
+          //     console.log("Ocurrió un error", err);
+          //   },
+          //   // Password attempt does not match already-encrypted version
+          //   incorrect: function () {
+          //     this.forms.errorLogin = true;
+          //   },
+          //   // OK.
+          //   success: function () {
+          //     this.forms.errorLogin = false;
+              this._userLogged.idUsuario = usuarioLogin.id;
+              console.log(this._userLogged.idUsuario);
+              this._router.navigateByUrl('home');
+          //   },
+          // });
+        }
       },
       (err) => {
         console.log("Ocurrió un error", err);
