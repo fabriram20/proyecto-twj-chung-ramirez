@@ -28,21 +28,40 @@ export class ProductoComponent implements OnInit {
       .params
       .subscribe(parametros => {
         this._parametros = parametros;
+        console.log(parametros);
 
-        // Peticion de productos
-        this._http.get(this._masterURL.url + "Producto?idCategoria=" + this._parametros.idCategoria).subscribe(
-          (res: Response) => {
-            this.productos = res.json().map((value) => {
-              value.textoAuxiliar = "";
-              value.formularioCerrado = true;
-              return value;
-            });
-            ;
-          },
-          (err) => {
-            console.log(err);
-          }
-        )
+        if (this._parametros.nombreProducto) {
+          // Peticion de productos por busqueda
+          this._http.get(this._masterURL.url + 'Producto?where={"nombreProducto":{"contains":"' + this._parametros.nombreProducto + '"}}').subscribe(
+            (res: Response) => {
+              console.log(res.json());
+              this.productos = res.json().map((value) => {
+                value.textoAuxiliar = "";
+                value.formularioCerrado = true;
+                return value;
+              });
+            },
+            (err) => {
+              console.log(err);
+            }
+          )
+        } else if (this._parametros.idCategoria) {
+          // Peticion de productos por categoria
+          this._http.get(this._masterURL.url + "Producto?idCategoria=" + this._parametros.idCategoria).subscribe(
+            (res: Response) => {
+              this.productos = res.json().map((value) => {
+                value.textoAuxiliar = "";
+                value.formularioCerrado = true;
+                return value;
+              });
+            },
+            (err) => {
+              console.log(err);
+            }
+          )
+        }
+
+
         // Peticion de categorias
         this._http.get(this._masterURL.url + "Categoria").subscribe(
           (res: Response) => {
@@ -54,7 +73,7 @@ export class ProductoComponent implements OnInit {
         )
       })
     // Comprobar idUsuario
-    if(this._userService.idUsuario == 1){
+    if (this._userService.idUsuario == 1) {
       this.admin = true;
     }
   }

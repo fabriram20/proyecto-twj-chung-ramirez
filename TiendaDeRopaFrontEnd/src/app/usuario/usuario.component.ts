@@ -56,7 +56,7 @@ export class UsuarioComponent implements OnInit {
           //     this.forms.errorLogin = false;
           this._userLogged.idUsuario = usuarioLogin.id;
           this._userLogged.idCarrito = usuarioLogin.idCarrito.id;
-          this._router.navigateByUrl('home');
+          this._router.navigate(['/home']);
           //   },
           // });
         }
@@ -85,7 +85,7 @@ export class UsuarioComponent implements OnInit {
             this._userLogged.idCarrito = carrito.id;
             console.log(this._userLogged.idUsuario);
             console.log(this._userLogged.idCarrito);
-            this._router.navigateByUrl('home');
+            this._router.navigate(['/home']);
           },
           (err) => {
             console.log("Ocurrió un error", err);

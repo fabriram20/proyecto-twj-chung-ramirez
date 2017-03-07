@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {Http, Response} from "@angular/http";
 import {MasterUrlService} from "./services/master-url.service";
 import {UserService} from "./services/user.service";
+import {NgForm} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -10,8 +12,9 @@ import {UserService} from "./services/user.service";
 })
 export class AppComponent {
   categorias = [];
+  buscarProducto = {};
 
-  constructor(private _http: Http, private _masterURL: MasterUrlService, private _userLogged: UserService) {
+  constructor(private _http: Http, private _masterURL: MasterUrlService, private _userLogged: UserService, private _router: Router) {
   }
 
   ngOnInit() {
@@ -27,5 +30,10 @@ export class AppComponent {
           console.log(err);
         }
       )
+  }
+
+  buscarProductos(formulario: NgForm) {
+    this._router.navigate(['/productos', formulario.value.nombreProducto]);
+    this.buscarProducto = {};
   }
 }
