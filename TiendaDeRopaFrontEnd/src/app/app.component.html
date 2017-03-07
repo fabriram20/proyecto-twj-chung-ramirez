@@ -19,7 +19,7 @@
             </button>
 
 
-            <a class="navbar-brand" [routerLink]="['home']">Tienda de Ropa</a>
+            <a class="navbar-brand" [routerLink]="['home']">Fedora Fashion</a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -29,7 +29,7 @@
             </ul>
             <form class="navbar-form navbar-right" role="form">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Buscar en la tienda">
+                <input type="text" class="form-control" placeholder="Buscar en la tienda" name="nombreProducto">
               </div>
               <button type="submit" class="btn btn-default">Buscar</button>
             </form>
@@ -52,12 +52,11 @@
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <ul class="nav navbar-nav navbar-right">
-              <li><a [routerLink]="['registro']">Registro</a></li>
+            <ul class="nav navbar-nav navbar-left" *ngFor="let categoria of categorias">
+              <li><a [routerLink]="['categorias',categoria.id,'productos']">{{categoria.nombreCategoria}}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a [routerLink]="['usuario']">Login</a></li>
+              <li><a [routerLink]="['login']">Login</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -67,4 +66,15 @@
 
   <router-outlet></router-outlet>
 
+  <!-- http://stackoverflow.com/questions/33517524/how-to-add-the-footer-with-social-icons-in-bootstrap -->
+  <footer class="footer">
+    <div class="container text-center">
+      <b>Conéctate:</b>
+      <a href="#"><i class="fa fa-facebook"></i></a>
+      <a href="#"><i class="fa fa-twitter"></i></a>
+      <a href="#"><i class="fa fa-linkedin"></i></a>
+      <a href="#"><i class="fa fa-google-plus"></i></a>
+      <a href="#"><i class="fa fa-skype"></i></a>
+    </div><!--End container-->
+  </footer><!--End footer 2-->
 </div>
