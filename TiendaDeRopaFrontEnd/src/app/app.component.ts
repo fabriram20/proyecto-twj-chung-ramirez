@@ -21,6 +21,7 @@ export class AppComponent {
           console.log(res.json());
           this.categorias = res.json();
           console.log(this._userLogged.idUsuario);
+          console.log(this._userLogged.idCarrito);
         },
         (err) => {
           console.log(err);

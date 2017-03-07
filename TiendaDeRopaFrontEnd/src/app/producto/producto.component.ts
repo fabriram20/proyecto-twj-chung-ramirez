@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Http, Response} from "@angular/http";
 import {MasterUrlService} from "../services/master-url.service";
@@ -12,32 +12,34 @@ import {UserService} from "../services/user.service";
 })
 export class ProductoComponent implements OnInit {
 
-  private _parametros:any;
-  nuevoProducto={};
-  productos=[];
-  categorias=[];
+  private _parametros: any;
+  nuevoProducto = {};
+  productos = [];
+  categorias = [];
 
   // disabledButtons = {
   //   NuevatiendaFormSubmitButton: false
   // }
-  constructor(private _activatedRoute: ActivatedRoute, private _http:Http, private _masterURL:MasterUrlService, private _userService:UserService) {}
+  constructor(private _activatedRoute: ActivatedRoute, private _http: Http, private _masterURL: MasterUrlService, private _userService: UserService) {
+  }
 
   ngOnInit() {
     this._activatedRoute
       .params
-      .subscribe(parametros=>{
+      .subscribe(parametros => {
         this._parametros = parametros;
 
         // Peticion de productos
         this._http.get(this._masterURL.url + "Producto?idCategoria=" + this._parametros.idCategoria).subscribe(
-          (res:Response)=>{
-            this.productos = res.json().map((value)=>{
+          (res: Response) => {
+            this.productos = res.json().map((value) => {
               value.textoAuxiliar = "";
               value.formularioCerrado = true;
               return value;
-            });;
+            });
+            ;
           },
-          (err)=>{
+          (err) => {
             console.log(err);
           }
         )
@@ -53,28 +55,28 @@ export class ProductoComponent implements OnInit {
       })
   }
 
-  crearProducto(formulario: NgForm){
+  crearProducto(formulario: NgForm) {
 
     console.log(this.nuevoProducto);
 
-    this._http.post(this._masterURL.url+'Producto',this.nuevoProducto).subscribe(
-      (res:Response)=>{
+    this._http.post(this._masterURL.url + 'Producto', this.nuevoProducto).subscribe(
+      (res: Response) => {
         this.productos.push(res.json());
-        this.nuevoProducto={};
+        this.nuevoProducto = {};
         // this.disabledButtons.NuevatiendaFormSubmitButton = false;
       },
-      (err)=>{
+      (err) => {
         console.log(err)
         // this.disabledButtons.NuevatiendaFormSubmitButton = false;
       }
     )
   }
 
-  borrarProducto(id:number) {
+  borrarProducto(id: number) {
     this._http.delete(this._masterURL.url + "Producto/" + id).subscribe(
       (res) => {
-        let productoBorrado=res.json();
-        this.productos = this.productos.filter(value=>productoBorrado.id!=value.id)
+        let productoBorrado = res.json();
+        this.productos = this.productos.filter(value => productoBorrado.id != value.id)
       },
       (err) => {
         console.log(err);
@@ -83,44 +85,43 @@ export class ProductoComponent implements OnInit {
   }
 
 
-  actualizarUsuario(producto:any){
-    let parametros={
-      nombreProducto:producto.value.nombreProducto,
-      foto:producto.value.foto,
-      precio:producto.value.precio,
-      idCategoria:producto.value.idcategoria
+  actualizarUsuario(producto: any) {
+    let parametros = {
+      nombreProducto: producto.value.nombreProducto,
+      foto: producto.value.foto,
+      precio: producto.value.precio,
+      idCategoria: producto.value.idcategoria
     };
 
     console.log(parametros.idCategoria);
-    if(parametros.idCategoria.equals('Hombre')){
-      parametros.foto='Hombre.jpg';
-    }else if(parametros.idCategoria='Mujer'){
-      parametros.foto='Mujer.jpg';
-    }else if(parametros.idCategoria='Niño'){
-      parametros.foto='Niño.jpg';
-    }else{parametros.foto='Niña.jpg';}
+    if (parametros.idCategoria.equals('Hombre')) {
+      parametros.foto = 'Hombre.jpg';
+    } else if (parametros.idCategoria = 'Mujer') {
+      parametros.foto = 'Mujer.jpg';
+    } else if (parametros.idCategoria = 'Niño') {
+      parametros.foto = 'Niño.jpg';
+    } else {
+      parametros.foto = 'Niña.jpg';
+    }
 
 
-    this._http.put(this._masterURL.url+"Producto/"+producto.id,parametros).subscribe(
-      (res:Response)=>{
+    this._http.put(this._masterURL.url + "Producto/" + producto.id, parametros).subscribe(
+      (res: Response) => {
         producto.formularioCerrado = !producto.formularioCerrado;
-        console.log("Respuesta: ",res.json());
+        console.log("Respuesta: ", res.json());
       },
-      (err)=>{
-        console.log("Error: ",err)
+      (err) => {
+        console.log("Error: ", err)
       }
     )
   }
 
-  productoAlCarrito(producto: any){
-    this._http.post(this._masterURL.url+'Detalle',{
-      idCarrito: this._userService.idCarrito,
-      idProducto: producto.id
-    }).subscribe(
-      (res:Response)=>{
+  productoAlCarrito(producto: any) {
+    this._http.post(this._masterURL.url + "Carrito/" + this._userService.idCarrito + "/productos/" + producto.id, {}).subscribe(
+      (res: Response) => {
         producto.textoAuxiliar = "Añadido al carrito"
       },
-      (err)=>{
+      (err) => {
         console.log(err)
       }
     )

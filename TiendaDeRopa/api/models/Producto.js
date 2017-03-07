@@ -23,9 +23,9 @@ module.exports = {
     idCategoria: {
       model: "Categoria"
     },
-    detalles: {
-      collection: "Detalle",
-      via: "idProducto"
+    carritos: {
+      collection: "Carrito",
+      via: "productos"
     }
   }
 };

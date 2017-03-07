@@ -12,9 +12,10 @@ module.exports = {
       collection: "Usuario",
       via: "idCarrito"
     },
-    detalles: {
-      collection: "Detalle",
-      via: "idCarrito"
+    productos: {
+      collection: "Producto",
+      via: "carritos",
+      dominant: true
     }
   }
 };
