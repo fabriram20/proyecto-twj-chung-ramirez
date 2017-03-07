@@ -31,7 +31,7 @@
               (click)="forms.mostrarNuevoClienteForm = !forms.mostrarNuevoClienteForm">¿Nuevo Cliente?
       </button>
       <div [hidden]="!forms.mostrarNuevoClienteForm">
-        <form (ngSubmit)="crearUsuario(nuevoUsuario)" #nuevoUsuario="ngForm">
+        <form (ngSubmit)="crearUsuario(nuevoUsuarioForm)" #nuevoUsuarioForm="ngForm">
           <div class="form-group">
             <label>Nombres: </label>
             <input type="text" class="form-control" placeholder="Nombres" name="nombres"

@@ -29,10 +29,10 @@ import {UserService} from "./services/user.service";
     routing
   ],
   providers: [
-    MasterUrlService
+    MasterUrlService,
+    UserService
   ],
-  bootstrap: (AppComponent,
-    [UserService])
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

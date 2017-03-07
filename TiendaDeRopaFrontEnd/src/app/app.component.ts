@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Http, Response} from "@angular/http";
 import {MasterUrlService} from "./services/master-url.service";
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import {MasterUrlService} from "./services/master-url.service";
 export class AppComponent {
   categorias = [];
 
-  constructor(private _http: Http, private _masterURL: MasterUrlService) {
+  constructor(private _http: Http, private _masterURL: MasterUrlService, private _userLogged: UserService) {
   }
 
   ngOnInit() {
@@ -19,6 +20,7 @@ export class AppComponent {
         (res) => {
           console.log(res.json());
           this.categorias = res.json();
+          console.log(this._userLogged.idUsuario);
         },
         (err) => {
           console.log(err);
